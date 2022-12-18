@@ -1,11 +1,12 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
+import {Application, Request, Response} from "express"
 
 
 (async () => {
   // Init the Express application
-  const app = express();
+  const app : Application = express();
   // Set the network port
   const port = process.env.PORT || 8082;
   // Use the body parser middleware for post requests
@@ -35,16 +36,16 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
 //    url: string - a publicly accessible url
 // RETURNS
 //    a boolean indicating true if url is valid image url or false if not
-  function isImage(url : string) {
+  function isImage(url : string) : boolean {
     return /^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
   }
 
-  app.get("/filteredimage/", async (req, res)=>{
+  app.get("/filteredimage/", async (req : Request, res: Response)=>{
    let { image_url } = req.query;
   // validate image_url
       if(isImage(image_url)) {
         try {
-          const filteredPath = await filterImageFromURL(image_url);
+          const filteredPath: string = await filterImageFromURL(image_url) as string;
           // check if filterImageFromURL was successful
           if(!filteredPath) {
             return res.status(404).send("File not found")
@@ -63,14 +64,12 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
        res.status(400).send(`"${image_url}" is not a valid image url. Please check the url`);
       }
     }
-   
-
   );
   
   //! END @TODO1
   // Root Endpoint
   // Displays a simple message to the user
-  app.get( "/", async ( req, res ) => {
+  app.get( "/", async ( req: Request, res : Response ) => {
     res.send("try GET /filteredimage?image_url={{}}")
   } );
   // Start the Server
