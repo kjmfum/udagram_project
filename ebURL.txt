@@ -1,0 +1,3 @@
+An endpoint URL for a running elastic beanstalk deployment (EB_URL) 
+
+http://project-dev.us-east-1.elasticbeanstalk.com/
