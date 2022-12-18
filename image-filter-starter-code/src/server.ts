@@ -47,16 +47,16 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
           const filteredPath = await filterImageFromURL(image_url);
           // check if filterImageFromURL was successful
           if(!filteredPath) {
-            return res.status(400).send("File not found")
+            return res.status(404).send("File not found")
           } else {
             res.status(200).sendFile(filteredPath, ()=>{
               // delete local file after sendFile
               deleteLocalFiles([filteredPath]);
            });
           }
-         } catch
+         } catch (e)
            {
-              res.status(500).send(`There was an internal error processing ${image_url}`);
+              res.status(422).send(`There was an error processing ${image_url}. ${e}`);
            }
         
       } else {
