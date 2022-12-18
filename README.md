@@ -6,3 +6,6 @@ http://project-dev.us-east-1.elasticbeanstalk.com/
 
 # Sample filter image url with the endpoint
 http://project-dev.us-east-1.elasticbeanstalk.com/filteredimage?image_url=https://inaturalist-open-data.s3.amazonaws.com/photos/72249626/medium.jpeg
+
+# Git repository
+https://github.com/kjmfum/udagram_project
